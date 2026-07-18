@@ -1,0 +1,72 @@
+---
+ 
+---
+
+<header>
+    <div>
+        <p>Emanuel Bustos</p>
+
+        <nav aria-label="Navegacion Principal">
+            <ul>
+                <li><a href="#home">home</a></li>
+                <li><a href="#skills">skills</a></li>
+                <li><a href="#projects">projects</a></li>
+                <li><a href="#education">education</a></li>
+                <li><a href="#github">github</a></li>
+                <li><a href="#contact">contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--color-bg);
+  }
+
+  header > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1280px;
+  }
+
+  header p {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--color-accent);
+    font-size: 1.1rem;
+  }
+
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    list-style: none;
+    border: 1px solid var(--color-text-muted);
+    border-radius: 999px;
+    padding: 0.6rem 1.75rem;
+    background-color: rgba(130, 136, 155, 0.15);
+    backdrop-filter: blur(8px);
+  }
+
+  nav a {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover {
+    color: var(--color-accent);
+  }
+</style>

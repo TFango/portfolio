@@ -1,3 +1,17 @@
+:root {
+  /* Colores */
+  --color-bg: rgba(42, 50, 75, 1);
+  --color-accent: rgba(0, 255, 205, 1);
+  --color-text-muted: rgba(130, 136, 155, 1);
+  --color-text-body: rgba(199, 204, 219, 1);
+  --color-text-heading: rgba(225, 229, 238, 1);
+
+  /* Tipografía */
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --font-heading: 'Inria Sans', serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
 *,
 *::before,
 *::after {
@@ -7,13 +21,22 @@
 }
 
 html {
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 body {
-  font-family: system-ui, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--color-bg);
+  color: var(--color-text-body);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
 }
 
 img,
