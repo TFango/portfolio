@@ -1,0 +1,144 @@
+---
+import Button from "../ui/Button.astro";
+import GithubIcon from "../icons/GithubIcon.astro";
+import LinkedinIcon from "../icons/LinkedinIcon.astro";
+import MailIcon from "../icons/MailIcon.astro";
+import PhoneIcon from "../icons/PhoneIcon.astro";
+import { Image } from "astro:assets";
+
+import miFoto from "../../assets/foto-perfil.png";
+---
+
+<section id="home">
+  <div>
+    <div>
+      <div>
+        <h1>Hola, Soy Ema</h1>
+        <p>FullStack Developer</p>
+      </div>
+
+      <p>Naci en Mar del Plata - Argentina</p>
+      <p>
+        Construyo aplicaciones web full-stack, buscando resolver problemas
+        reales y aportar a la comunidad. Me mantengo en constante desarrollo y
+        buscando nuevas experiencias.
+      </p>
+
+      <div>
+        <Button
+          text="Mis proyectos"
+          variant="primary"
+          href="#projects"
+          icon="arrow"
+        />
+        <Button text="Resumen" variant="secondary" href="#" icon="download" />
+      </div>
+
+      <div>
+        <ul>
+          <li><a href="https://github.com/TFango"><GithubIcon /></a></li>
+          <li>
+            <a href="https://www.linkedin.com/in/facundo-emanuel-jimenez"
+              ><LinkedinIcon /></a
+            >
+          </li>
+          <li><a href="mailto:emanuelfbustos@gmail.com"><MailIcon /></a></li>
+          <li><a href="tel:+542233126017"><PhoneIcon /></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <Image src={miFoto} alt="Foto de Emanuel Bustos" width={300} height={300} />
+  </div>
+</section>
+
+<style>
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - var(--header-height));
+    padding: 2rem;
+  }
+
+  section > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1280px;
+  }
+
+  section > div > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    max-width: 480px;
+  }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 2.75rem;
+    line-height: 1.15;
+    color: var(--color-text-heading);
+  }
+
+  h1 + p {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--color-accent);
+    font-size: 0.95rem;
+    margin-top: 0.35rem;
+  }
+
+  p {
+    font-family: var(--font-body);
+    color: var(--color-text-body);
+    line-height: 1.6;
+  }
+
+  /* fila de botones */
+  section > div > div:first-child > div:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  /* fila de redes */
+  section > div > div:first-child > div:nth-of-type(3) ul {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  section > div > div:first-child > div:nth-of-type(3) a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background-color: rgba(130, 136, 155, 0.15);
+    color: var(--color-text-muted);
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  section > div > div:first-child > div:nth-of-type(3) a:hover {
+    color: var(--color-accent);
+    background-color: rgba(0, 255, 205, 0.12);
+  }
+
+  img {
+    flex-shrink: 0;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-text-muted);
+  }
+</style>
