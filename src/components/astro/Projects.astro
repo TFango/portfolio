@@ -1,0 +1,69 @@
+---
+import ProjectTiltCard from "../react/ProjectTiltCard.tsx";
+import inkode from "../../assets/inkode.png";
+
+const proyectos = [
+  {
+    imageSrc: inkode.src,
+    title: "inkode",
+    description:
+      "WEB para programadores, combina un canvas infinito con un editor de código, permitiendo dibujar y escribir código en capas separadas",
+    githubUrl: "https://github.com/TFango/inkode-web",
+    liveUrl: "https://inkode-web.vercel.app",
+  },
+];
+
+const [proyectoDestacado, ...otrosProyectos] = proyectos;
+---
+
+<section id="projects">
+  <div>
+    <div>
+      <h2>Proyectos</h2>
+    </div>
+
+    <div class="featured">
+      <ProjectTiltCard client:visible featured {...proyectoDestacado} />
+    </div>
+
+    <div class="grid">
+      {
+        otrosProyectos.map((proyecto) => (
+          <ProjectTiltCard client:visible {...proyecto} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    display: flex;
+    justify-content: center;
+    padding: 6rem 2rem;
+  }
+
+  section > div {
+    width: 100%;
+    max-width: 1280px;
+  }
+
+  section > div > div:first-child {
+    margin-bottom: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  .featured {
+    max-width: 60%;
+    margin: 0 auto 3rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+</style>

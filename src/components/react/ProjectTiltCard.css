@@ -1,0 +1,90 @@
+.tilt-card {
+  position: relative;
+  width: 100%;
+  perspective: 900px;
+  margin: 0;
+}
+
+.tilt-card-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  border: 1px solid var(--color-text-muted);
+}
+
+.tilt-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tilt-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(42, 50, 75, 0.95) 0%,
+    rgba(42, 50, 75, 0.75) 55%,
+    rgba(42, 50, 75, 0.15) 100%
+  );
+  backdrop-filter: blur(3px);
+}
+
+.tilt-card--featured .tilt-card-inner {
+  aspect-ratio: 21 / 9;
+}
+
+.tilt-card-overlay h3 {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  font-size: 1.3rem;
+}
+
+.tilt-card-overlay p {
+  font-family: var(--font-body);
+  color: var(--color-text-body);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.tilt-card-links {
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+.tilt-card-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background-color: rgba(130, 136, 155, 0.25);
+  color: var(--color-text-heading);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.tilt-card-links a:hover {
+  color: var(--color-accent);
+  background-color: rgba(0, 255, 205, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card-inner {
+    transform: none !important;
+  }
+}
