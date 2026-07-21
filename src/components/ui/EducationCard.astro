@@ -1,0 +1,28 @@
+---
+interface Props {
+  number: number;
+  title: string;
+  institution: string;
+  dateStart: string;
+  dateEnd: string;
+  description: string;
+}
+
+const { number, title, institution, dateStart, dateEnd, description } =
+  Astro.props;
+---
+
+<div class="education-row">
+  <span class="education-card__number">{number}</span>
+
+  <div class="education-card">
+    <div class="education-card__header">
+      <h3>{title}</h3>
+      <span class="education-card__badge">{dateStart} - {dateEnd}</span>
+    </div>
+
+    <p class="education-card__institution">{institution}</p>
+
+    <p class="education-card__description">{description}</p>
+  </div>
+</div>

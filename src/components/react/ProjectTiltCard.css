@@ -34,9 +34,9 @@
   padding: 1.5rem;
   background: linear-gradient(
     to top,
-    rgba(42, 50, 75, 0.95) 0%,
-    rgba(42, 50, 75, 0.75) 55%,
-    rgba(42, 50, 75, 0.15) 100%
+    rgba(var(--color-bg-rgb), 0.95) 0%,
+    rgba(var(--color-bg-rgb), 0.75) 55%,
+    rgba(var(--color-bg-rgb), 0.15) 100%
   );
   backdrop-filter: blur(3px);
 }

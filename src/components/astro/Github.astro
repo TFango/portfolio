@@ -1,0 +1,65 @@
+---
+import GithubCalendar from "../react/GithubCalendar.tsx";
+
+const githubUsername = "TFango";
+
+const [lastYearResponse, allYearsResponse] = await Promise.all([
+  fetch(`https://github-contributions-api.jogruber.de/v4/${githubUsername}?y=last`),
+  fetch(`https://github-contributions-api.jogruber.de/v4/${githubUsername}?y=all`),
+]);
+
+const { contributions: lastYearContributions } = await lastYearResponse.json();
+const { contributions: allContributions, total } = await allYearsResponse.json();
+
+const currentYear = new Date().getFullYear().toString();
+const years = Object.keys(total).sort((a, b) => Number(b) - Number(a));
+
+const dataByYear = Object.fromEntries(
+  years.map((year) => [
+    year,
+    year === currentYear
+      ? lastYearContributions
+      : allContributions.filter((day: { date: string }) =>
+          day.date.startsWith(year),
+        ),
+  ]),
+);
+---
+
+<section id="github">
+  <div>
+    <h2>GitHub</h2>
+
+    <div class="github-card">
+      <GithubCalendar
+        client:visible
+        dataByYear={dataByYear}
+        years={years}
+        currentYear={currentYear}
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    display: flex;
+    justify-content: center;
+    padding: 6rem 2rem;
+  }
+
+  section > div {
+    width: 100%;
+    max-width: 1280px;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .github-card {
+    display: flex;
+    justify-content: center;
+  }
+</style>

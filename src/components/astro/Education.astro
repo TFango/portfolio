@@ -1,0 +1,169 @@
+---
+import EducationCard from "../ui/EducationCard.astro";
+
+const educations = [
+  {
+    number: 1,
+    title: "Tecnicatura en Programación",
+    institution: "Universidad Tecnológica Nacional (UTN)",
+    dateStart: "2023",
+    dateEnd: "En curso",
+    description:
+      "Me anoté en la facultad buscando dar mis primeros pasos, me enseñó mucho las bases, en esta institución aprendí sobre: C, Java, Spring Boot, Angular, MySQL. También me dieron las herramientas necesarias para trabajar en equipo, enseñándome JIRA y SCRUM, aún así, me sentí un poco atrasado, por lo cual decidí dar un paso más.",
+  },
+  {
+    number: 2,
+    title: "Curso Full-Stack",
+    institution: "APX",
+    dateStart: "2025",
+    dateEnd: "2026",
+    description:
+      "En este curso aprendí todas las herramientas necesarias para armar mis proyectos, no solo me enseñó lenguajes, sino más formas de trabajar, me impulsó a realizar 'Pair Programming' con personas que no conocía. Me enseñaron mucho más sobre estructuras, APIs y formas de trabajar. Aquí aprendí: HTML, CSS, TypeScript, JavaScript, Node.js, Express.js, Next.js, Figma, React, Sequelize, Firebase, etc.",
+  },
+];
+---
+
+<section id="education">
+  <div>
+    <h2>Mi trayectoria</h2>
+
+    <div>
+      {
+        educations.map((education) => (
+          <EducationCard
+            number={education.number}
+            title={education.title}
+            institution={education.institution}
+            dateStart={education.dateStart}
+            dateEnd={education.dateEnd}
+            description={education.description}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    display: flex;
+    justify-content: center;
+    padding: 6rem 2rem;
+  }
+
+  section > div {
+    width: 100%;
+    max-width: 1280px;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    margin-bottom: 3.5rem;
+  }
+
+  /* contenedor de la línea de tiempo */
+  section > div > div:last-child {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  /* línea central */
+  section > div > div:last-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: var(--color-text-muted);
+    transform: translateX(-50%);
+  }
+
+  :global(.education-row) {
+    position: relative;
+    display: flex;
+    width: 100%;
+  }
+
+  /* alterna izquierda/derecha */
+  :global(.education-row:nth-child(odd) .education-card) {
+    margin-left: auto;
+  }
+
+  :global(.education-row:nth-child(even) .education-card) {
+    margin-right: auto;
+  }
+
+  :global(.education-card) {
+    width: calc(50% - 3rem);
+    background: linear-gradient(
+      135deg,
+      rgba(130, 136, 155, 0.16) 0%,
+      rgba(130, 136, 155, 0.03) 100%
+    );
+    border: 1px solid var(--color-text-muted);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: blur(6px);
+  }
+
+  :global(.education-card__header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  :global(.education-card__header h3) {
+    font-family: var(--font-heading);
+    color: var(--color-text-heading);
+    font-size: 1.15rem;
+  }
+
+  :global(.education-card__badge) {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-text-muted);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    white-space: nowrap;
+  }
+
+  :global(.education-card__institution) {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  :global(.education-card__description) {
+    font-family: var(--font-body);
+    color: var(--color-text-body);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* círculo numerado, centrado sobre la línea */
+  :global(.education-card__number) {
+    position: absolute;
+    left: 50%;
+    top: 1.5rem;
+    transform: translateX(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-accent);
+    color: var(--color-text-heading);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    z-index: 2;
+  }
+</style>
