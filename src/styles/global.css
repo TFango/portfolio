@@ -8,6 +8,7 @@
   --color-text-muted-rgb: 130, 136, 155;
   --color-text-body: rgba(199, 204, 219, 1);
   --color-text-heading: rgba(225, 229, 238, 1);
+  --color-error: rgba(255, 107, 107, 1);
 
   /* Tipografía */
   --font-mono: "Space Mono", ui-monospace, monospace;
