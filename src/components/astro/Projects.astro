@@ -1,19 +1,15 @@
 ---
+import { getCollection } from "astro:content";
 import ProjectTiltCard from "../react/ProjectTiltCard.tsx";
-import inkode from "../../assets/inkode.png";
 
-const proyectos = [
-  {
-    imageSrc: inkode.src,
-    title: "inkode",
-    description:
-      "WEB para programadores, combina un canvas infinito con un editor de código, permitiendo dibujar y escribir código en capas separadas",
-    githubUrl: "https://github.com/TFango/inkode-web",
-    liveUrl: "https://inkode-web.vercel.app",
-  },
-];
+const proyectos = await getCollection("projects");
 
-const [proyectoDestacado, ...otrosProyectos] = proyectos;
+const proyectoDestacado =
+  proyectos.find((proyecto) => proyecto.data.featured) ?? proyectos[0];
+
+const otrosProyectos = proyectos.filter(
+  (proyecto) => proyecto.id !== proyectoDestacado.id,
+);
 ---
 
 <section id="projects">
@@ -23,13 +19,26 @@ const [proyectoDestacado, ...otrosProyectos] = proyectos;
     </div>
 
     <div class="featured">
-      <ProjectTiltCard client:visible featured {...proyectoDestacado} />
+      <ProjectTiltCard
+        client:visible
+        featured
+        slug={proyectoDestacado.id}
+        imageSrc={proyectoDestacado.data.image?.src ?? ""}
+        title={proyectoDestacado.data.title}
+        description={proyectoDestacado.data.description}
+      />
     </div>
 
     <div class="grid">
       {
         otrosProyectos.map((proyecto) => (
-          <ProjectTiltCard client:visible {...proyecto} />
+          <ProjectTiltCard
+            client:visible
+            slug={proyecto.id}
+            imageSrc={proyecto.data.image?.src ?? ""}
+            title={proyecto.data.title}
+            description={proyecto.data.description}
+          />
         ))
       }
     </div>

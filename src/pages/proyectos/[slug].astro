@@ -1,0 +1,169 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import Tag from "../../components/ui/Tag.astro";
+import GithubIcon from "../../components/icons/GithubIcon.astro";
+import ArrowIcon from "../../components/icons/ArrowIcon.astro";
+
+export async function getStaticPaths() {
+  const proyectos = await getCollection("projects");
+
+  return proyectos.map((proyecto) => ({
+    params: { slug: proyecto.id },
+    props: { proyecto },
+  }));
+}
+
+const { proyecto } = Astro.props;
+const { Content } = await render(proyecto);
+---
+
+<Layout title={proyecto.data.title}>
+  <main>
+    <article>
+      <a href="/#projects" class="back-link">← Volver a proyectos</a>
+
+      <h1>{proyecto.data.title}</h1>
+      <p class="description">{proyecto.data.description}</p>
+
+      <div class="tags">
+        {proyecto.data.tags.map((tag: string) => <Tag text={tag} />)}
+      </div>
+
+      <div class="links">
+        {proyecto.data.repo && (
+          <a href={proyecto.data.repo} target="_blank" rel="noreferrer">
+            <GithubIcon />
+            Repositorio
+          </a>
+        )}
+        {proyecto.data.link && (
+          <a href={proyecto.data.link} target="_blank" rel="noreferrer">
+            Ver sitio en vivo
+            <ArrowIcon />
+          </a>
+        )}
+      </div>
+
+      {proyecto.data.image && (
+        <Image
+          src={proyecto.data.image}
+          alt={proyecto.data.title}
+          width={1000}
+          height={562}
+        />
+      )}
+
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  main {
+    display: flex;
+    justify-content: center;
+    padding: 8rem 2rem 6rem;
+  }
+
+  article {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .description {
+    font-family: var(--font-body);
+    color: var(--color-text-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 2rem;
+  }
+
+  .links {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text-heading);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .links a:hover {
+    color: var(--color-accent);
+  }
+
+  article > img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    border: 1px solid var(--color-text-muted);
+    margin-bottom: 3rem;
+  }
+
+  .prose :global(h2) {
+    font-family: var(--font-heading);
+    color: var(--color-text-heading);
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(p) {
+    font-family: var(--font-body);
+    color: var(--color-text-body);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    color: var(--color-text-body);
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(strong) {
+    color: var(--color-text-heading);
+  }
+
+  .prose :global(a) {
+    color: var(--color-accent);
+  }
+</style>
